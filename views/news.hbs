@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <span class="navbar-brand"><a href="?category=protest"><img src="/images/news.png" width="30" height="30" alt=""></a></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="?category=protest">Protest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?category=fight">Fight</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?category=assault">Assault</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?category=comment">Comment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?category=cooperate">Cooperate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?category=consult">Consult</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="?category=aid">Aid</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row main-row">
+        <div class="col-4">
+            <div id="map"></div>
+        </div>
+        <div class="col-8">
+            <div id="top-ten" class="row">
+                <div class="table-responsive news-block col-12" id="info">
+                    <table id="top-ten-table" class="table table-bordered table-striped">
+                        <thead class="thead-dark header-row">
+                            <tr>
+                                <th>TITLE</th>
+                                <th>KEYWORDS</th>
+                                <th>A1</th>
+                                <th>A2</th>
+                                <th>G</th>
+                                <th>S</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each stories}}
+                            <tr>
+                                <td><a href="{{this.source}}" data-globalid="{{this.globaleventid}}" target="blank">{{this.title}}</a></td>
+                                <td>{{this.keywords}}</td>
+                                <td>{{this.name_one}}</td>
+                                <td>{{this.name_two}}</td>
+                                <td>{{this.goldstein}}</td>
+                                <td>{{this.avgtone}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
