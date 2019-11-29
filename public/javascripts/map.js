@@ -28,21 +28,6 @@ function fetch_events(e) {
             onEachFeature: function(feat, layer) {
 
                 layer.bindPopup(`
-                    <strong>Event ID: ${feat.properties.globaleventid}</strong><br/>
-                    <strong>Event Code: ${feat.properties.eventcode}</strong><br/>
-                    <hr style="dotted 1px;" />
-
-                    Actor 1: ${feat.properties.actor1name} <br/>
-                    Actor 2: ${feat.properties.actor2name} <br/>
-                    <hr style="dotted 1px;" />
-
-                    Average Tone: ${feat.properties.avgtone} <br/>
-                    Goldstein Scale: ${feat.properties.goldsteinscale} <br/>
-                    <hr style="dotted 1px;" />
-
-                    Keywords: ${feat.properties.keywords} <br/>
-                    <hr style="dotted 1px;" />
-
                     ${feat.properties.summary} <br/>
                     <br/><a href="${feat.properties.sourceurl}" target="_blank">Go to the Article</a> <br/>
                 `);
