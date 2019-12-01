@@ -37,4 +37,13 @@ module.exports = {
         limit 20
     ) row) features;
    `
+   ,
+
+   skills: `
+   select title
+   from gdelt_latest_dst
+   where left(eventcode, 2) = $1
+   limit 5
+   `
+   
 }
