@@ -10,12 +10,17 @@ router.get('/', (rt_req, rt_res) => {
     var [cameo_name, cameo_code] = utils.get_cameo(rt_req.url)
 
     // Return Rows to Handlebars Template
-    db.query(sql.base, [cameo_code], (err, res) => {
+    db.query(sql.base, [cameo_code], (base_err, base_res) => {
 
-        rt_res.render('news', {
-            title:  `${cameo_name} Headlines`.toUpperCase(),
-            stories: res.rows,
-            cam_type: cameo_name[0].toUpperCase() + cameo_name.slice(1)
+        db.query(sql.lastrun, [], (time_err, time_res) => {
+
+            rt_res.render('news', {
+                date: utils.get_time(time_res.rows[0].runtime),
+                title:  `${cameo_name} Headlines`.toUpperCase(),
+                stories: base_res.rows,
+                cam_type: cameo_name[0].toUpperCase() + cameo_name.slice(1)
+            })
+
         })
     
     })

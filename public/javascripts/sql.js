@@ -45,5 +45,13 @@ module.exports = {
    where left(eventcode, 2) = $1
    limit 5
    `
+   ,
+
+   lastrun: `
+   select runtime
+   from gdelt_latest_run
+   order by runtime desc
+   limit 1
+   `
    
 }
