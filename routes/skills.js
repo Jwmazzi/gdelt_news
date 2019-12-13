@@ -12,7 +12,7 @@ router.get('/', (rt_req, rt_res) => {
     // Return Rows to Alexa Skill
     db.query(sql.skills, [cameo_code], (err, res) => {
 
-        rt_res.send(res.rows.map(r => r.title).join(' Next Headline '))
+        rt_res.send(res.rows.map(r => r.title).join('<break time="1s"/> Next Headline <break time="1s"/>'))
     
     })
 
