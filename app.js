@@ -3,10 +3,10 @@ const createError  = require('http-errors');
 const express      = require('express');
 const logger       = require('morgan');
 const path         = require('path');
+const cors         = require('cors')
 
 var skillsRouter = require('./routes/skills');
 var newsRouter   = require('./routes/news');
-var geomRouter   = require('./routes/geom');
 
 var app = express();
 
@@ -21,10 +21,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Enable CORS
+app.use(cors())
+
 // Establish Routes
 app.use('/skills', skillsRouter)
-app.use('/geom',   geomRouter)
-app.use('/news',   newsRouter);
+app.use('/news',   newsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
