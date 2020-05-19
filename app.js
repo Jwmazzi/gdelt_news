@@ -6,7 +6,7 @@ const path         = require('path');
 const cors         = require('cors')
 
 var skillsRouter = require('./routes/skills');
-var newsRouter   = require('./routes/news');
+var newsRouter   = require('./routes/newsy');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.use(cors())
 
 // Establish Routes
 app.use('/skills', skillsRouter)
-app.use('/news',   newsRouter)
+app.use('/newsy',   newsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
