@@ -6,7 +6,7 @@ const db      = require('../public/javascripts/db')
 router.get('/', (rt_req, rt_res) => {
 
     // Unpack Cameo Data from Incoming Request URL
-    var [cameo_name, cameo_code] = utils.get_cameo(rt_req.url)
+    var [cameo_name, cameo_code, version] = utils.get_params(rt_req.url)
 
     // Return Rows to Alexa Skill
     db.query(db.sql.skills, [cameo_code], (err, res) => {
