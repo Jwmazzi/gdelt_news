@@ -14,7 +14,7 @@ module.exports = {
         select globaleventid, left(title, 75) as title, keywords, sourceurl as source, site, summary, 
         actor1name as name_one, actor2name as name_two, round(avgtone::numeric, 2) as avgtone,
         goldsteinscale as goldstein, st_asgeojson(geom) as geom
-        from v2
+        from v1
         where left(eventcode, 2) = $1
         order by goldstein asc
         limit 20
@@ -47,6 +47,18 @@ module.exports = {
         limit 1
         `
         , 
+
+        v1_keys: `
+        select regexp_split_to_array(keywords, ';') as keywords from v1
+        where keywords is not null
+        `
+        ,
+
+        v2_keys: `
+        select regexp_split_to_array(keywords, ';') as keywords from v2
+        where keywords is not null   
+        `
+        ,
 
         skills: `
         select title

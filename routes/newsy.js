@@ -9,7 +9,7 @@ router.get('/', (rt_req, rt_res) => {
     // Unpack Cameo Data from Incoming Request URL
     var [cameo_name, cameo_code, version] = utils.get_params(rt_req.url)
 
-    // Get Correct Query
+    // Get Correct Query - Potentailly Move to util.js
     var [data, time]  = (version == 'v1') ? [db.sql.v1_base, db.sql.v1_lastrun] : [db.sql.v2_base, db.sql.v2_lastrun]
 
     // Return Rows to Client
