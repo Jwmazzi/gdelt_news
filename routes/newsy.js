@@ -13,8 +13,6 @@ router.get('/', async (rt_req, rt_res) => {
     let newsQuery = utils.getNewsQuery(cameo_code, version, keyword)
     let timeQuery = utils.getTimeQuery(version)
 
-    console.log(newsQuery)
-
     // Collect V1/V2 Stories
     // TODO - Handle Error Response Within utils.js?
     let stories = await db.query(newsQuery, []).catch(e => {console.log(e); return})
