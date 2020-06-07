@@ -4,28 +4,28 @@ const utils   = require('../public/javascripts/utils');
 const db      = require('../public/javascripts/db')
 
 
-router.get('/', (rt_req, rt_res) => {
+router.get('/', async (rt_req, rt_res) => {
     
-    // Unpack Cameo Data from Incoming Request URL
-    var [cameo_name, cameo_code, version] = utils.get_params(rt_req.url)
+    // Unpack Incoming Arguments
+    var [cameo_name, cameo_code, version, keyword] = utils.get_params(rt_req.url)
 
-    // Get Correct Query - Potentailly Move to util.js
-    var [data, time]  = (version == 'v1') ? [db.sql.v1_base, db.sql.v1_lastrun] : [db.sql.v2_base, db.sql.v2_lastrun]
+    // Get Relevant Queries
+    let newsQuery = utils.getNewsQuery(cameo_code, version, keyword)
+    let timeQuery = utils.getTimeQuery(version)
 
-    // Return Rows to Client
-    db.query(data, [cameo_code], (base_err, base_res) => {
+    console.log(newsQuery)
 
-        db.query(time, [], (time_err, time_res) => {
+    // Collect V1/V2 Stories
+    // TODO - Handle Error Response Within utils.js?
+    let stories = await db.query(newsQuery, []).catch(e => {console.log(e); return})
+    let runtime = await db.query(timeQuery, []).catch(e => {console.log(e); return})
 
-            rt_res.send({
-                date: utils.get_time(time_res.rows[0].runtime),
-                title:  `${cameo_name} Headlines`.toUpperCase(),
-                stories: base_res.rows,
-                cam_type: cameo_name[0].toUpperCase() + cameo_name.slice(1)
-            })
-
-        })
-    
+    // Return Data to Client
+    rt_res.send({
+        date: utils.get_time((runtime.rows.length < 1) ? 0 : runtime.rows[0].runtime),
+        title:  `${cameo_name} Headlines`.toUpperCase(),
+        stories: stories.rows,
+        cam_type: cameo_name[0].toUpperCase() + cameo_name.slice(1)
     })
 
 })
