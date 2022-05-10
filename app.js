@@ -9,6 +9,7 @@ var keywordRouter  = require('./routes/keywords');
 var skillsRouter   = require('./routes/skills');
 var newsRouter     = require('./routes/newsy');
 
+require('dotenv').config()
 
 var app = express();
 

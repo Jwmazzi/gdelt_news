@@ -25,12 +25,10 @@ module.exports = {
 
     getNewsQuery(cameo_code, version, keyword) {
 
-        console.log(keyword)
-
         let base_where = `where left(eventcode, 2) = '${cameo_code}'`
         let full_where = (keyword === undefined || keyword === 'CLEAR') ? base_where : `${base_where} and keywords like '%${keyword.toLowerCase()}%'`
 
-        return [db.sql.story_base, `from ${version}`, full_where, db.sql.story_order].join(' ')
+        return [db.sql.story_base, `from ${version}_exports`, full_where, db.sql.story_order].join(' ')
 
     },
 
