@@ -1,5 +1,4 @@
-module.exports = {
-    
+export const cameo: { [key: string]: string } = {
     comment:   '01',
     cooperate: '03',
     consult:   '04',
@@ -7,5 +6,4 @@ module.exports = {
     protest:   '14',
     assault:   '18',
     fight:     '19'
-
 }
