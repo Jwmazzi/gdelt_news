@@ -18,7 +18,7 @@ export function get_params(req_url: string) {
 
     return {
         cameo_name: name,
-        caemo_code: cameo[name.toString()],
+        cameo_code: cameo[name.toString()],
         version: url_params.v ?? 'v1',
         keyword: url_params.keyword
     }

@@ -10,7 +10,7 @@ router.get("/", async (req: Request, resp: Response) => {
 
     let newsQuery = getNewsQuery(parameters.version);
 
-    let stories = await query(newsQuery, [parameters.cameo_name]);
+    let stories = await query(newsQuery, [parameters.cameo_code]);
 
     resp.send({
         // date: utils.get_time((runtime.rows.length < 1) ? 0 : runtime.rows[0].runtime),
