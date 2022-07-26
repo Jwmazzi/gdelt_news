@@ -1,15 +1,15 @@
 import { Router, Request, Response } from "express";
-import { query, getKeywordsQuery } from "../public/db";
-import { get_params } from "../public/utils";
+import { query, keywordQuery } from "../public/db";
+import { getParams } from "../public/utils";
 import _ from "lodash";
 
 const router = Router();
 
 router.get("/", async (req: Request, resp: Response) => {
 
-    let parameters = get_params(req.url);
+    let parameters = getParams(req.url);
 
-    let keysQuery = getKeywordsQuery(parameters.version);
+    let keysQuery = keywordQuery(parameters.version);
     let keywords = await query(keysQuery, [parameters.cameo_code]);
 
     let keys = keywords.rows.map(e => e.keywords).flat().map(e => e.trim());
